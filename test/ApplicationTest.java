@@ -4,7 +4,7 @@ import play.twirl.api.Content;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import views.html.sample.index;
-import views.html.utils.error500;
+import views.html.sample.error500;
 
 /**
  *
