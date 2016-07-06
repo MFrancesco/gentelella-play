@@ -1,7 +1,7 @@
 # Gentelella admin template for Play Framework
 
 Starting from [play2-java](https://github.com/playframework/playframework/tree/master/templates/play-java) template
-a minimal structure for the views and assets has been setted up in so developer can create new views easily.
+a minimal structure for the views and assets has been setted up so developer can create new views easily.
 
 
 ## Installation
