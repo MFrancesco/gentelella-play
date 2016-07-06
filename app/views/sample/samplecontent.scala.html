@@ -1,0 +1,90 @@
+@()
+
+@base(
+"Title",
+"A more complex base template extension",
+extraScripts = wizardHandlingJs){
+<div id="wizard" class="form_wizard wizard_horizontal">
+    <ul class="wizard_steps anchor">
+        <li>
+            <a href="#step-1" class="selected" isdone="1" rel="1">
+                <span class="step_no">1</span>
+                            <span class="step_descr">
+                                              Step 1<br>
+                                              <small>Step 1 description</small>
+                                          </span>
+            </a>
+        </li>
+        <li>
+            <a href="#step-2" class="done" isdone="1" rel="2">
+                <span class="step_no">2</span>
+                            <span class="step_descr">
+                                              Step 2<br>
+                                              <small>Step 2 description</small>
+                                          </span>
+            </a>
+        </li>
+        <li>
+            <a href="#step-3" class="done" isdone="1" rel="3">
+                <span class="step_no">3</span>
+                            <span class="step_descr">
+                                              Step 3<br>
+                                              <small>Step 3 description</small>
+                                          </span>
+            </a>
+        </li>
+    </ul>
+
+
+
+
+
+    <div id="step-1" class="content" style="display: none;">
+        <h2 class="StepTitle">What is this</h2>
+        <p>
+            This view is obtained by extending the base view
+        </p>
+    </div><div id="step-2" class="content" style="display: none;">
+    <h2 class="StepTitle">How is done</h2>
+    <p>
+        In the base view constructor we setted the HTML page title shown in the browser tab, the page title
+    </p>
+    <p>
+        And then setted the value of extraScripts
+    </p>
+</div><div id="step-3" class="content" style="display: none;">
+    <h2 class="StepTitle">Extrascripts</h2>
+    <p>
+        Extrascripts is valued with code for loading the
+        jquery plugin, and the javascript to initialize it.
+        All the Extrascripts will be added on the bottom of the page as you can see in skeleton.scala.html
+    </p>
+    <p>
+        Extrahead, instead, could be used when you need to add additional css or javascript code that
+        has to be added on the top of the page
+    </p>
+</div>
+</div>
+}
+
+
+@wizardHandlingJs = {
+<!-- Including jQuery Smart Wizard Library -->
+<script src='@routes.Assets.versioned("javascripts/theme/jquery.smartWizard.js")' type="text/javascript"></script>
+<!-- jQuery Smart Wizard code -->
+<script>
+      $(document).ready(function() {
+        $('#wizard').smartWizard();
+
+        $('#wizard_verticle').smartWizard({
+          transitionEffect: 'slide'
+        });
+
+        $('.buttonNext').addClass('btn btn-success');
+        $('.buttonPrevious').addClass('btn btn-primary');
+        $('.buttonFinish').addClass('btn btn-default');
+      });
+    </script>
+<!-- /jQuery Smart Wizard code -->
+}
+

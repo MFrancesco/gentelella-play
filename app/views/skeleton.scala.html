@@ -1,0 +1,18 @@
+@(
+title: String = "scoring",
+extraHead: Html = Html(""),
+extraScripts: Html = Html(""),
+bodyClass : String = "nav-md"
+)(content : Html)
+<!DOCTYPE html>
+<html lang="en">
+    @header(title, extraHead)
+    <body class="@bodyClass">
+    <div class="container body">
+        <div class="main_container">
+            @content
+        </div>
+    </div>
+    </body>
+    @extraScripts
+</html>
