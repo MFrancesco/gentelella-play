@@ -1,1 +1,5 @@
 In this folder will be inserted all the script used in production or in the test environment
+
+launch_inmemory will launch the app with the inmemory conf file, and inmemory db
+launch will launch the app using the application.conf file. This means that the play evolutions won't be executed.
+launch apply_Evolutions will launch the app executing all the evolutions, if needed.
