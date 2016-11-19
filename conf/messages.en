@@ -10,7 +10,7 @@ user.editProfile=Edit user profile
 
 #Errors
 error.CredentialException=Wrong credentials
-
+error.passwordDoesNotMatch=Password does not match
 
 #Various
 Success=Success

@@ -1,6 +1,8 @@
 package com.github.gentelella.play.controllers;
 
+import com.github.gentelella.play.forms.EditUser;
 import com.github.gentelella.play.models.User;
+import com.github.gentelella.play.security.CryptoUtils;
 import com.google.inject.Inject;
 import org.pac4j.core.config.Config;
 import org.pac4j.play.java.Secure;
@@ -29,40 +31,22 @@ import static play.mvc.Results.ok;
  */
 @Singleton
 public class LoggedController extends BaseLoggedController {
-    Config config;
-    FormFactory formFactory;
-    Form<EditUser> editUserForm;
+
+    private final CryptoUtils cryptoUtils;
+    private final Config config;
+    private final FormFactory formFactory;
+    private final Form<EditUser> editUserForm;
 
     @Inject
-    public LoggedController(Config config, FormFactory formFactory){
+    public LoggedController(Config config, FormFactory formFactory, CryptoUtils cryptoUtils){
         this.config = config;
         this.formFactory = formFactory;
+        this.cryptoUtils = cryptoUtils;
         editUserForm = formFactory.form(EditUser.class);
     }
 
 
-    public static class EditUser {
-        @Constraints.Required
-        @Constraints.MinLength(2)
-        public String name;
-        @Constraints.Required
-        @Constraints.MinLength(2)
-        public String surname;
-        @Constraints.Required
-        @Constraints.MinLength(4)
-        public String password;
-        @Constraints.Required
-        @Constraints.MinLength(4)
-        public String confirmPassword;
 
-        public List<ValidationError> validate() {
-            List<ValidationError> errors = new LinkedList<ValidationError>();
-            if (!password.equals(confirmPassword)) {
-                errors.add(new ValidationError("confirmPassword", "Password does not match", new LinkedList<Object>()));
-            }
-            return errors.isEmpty() ? null : errors;
-        }
-    }
 
     @Secure(clients = "FormClient" )
     public Result index() {
@@ -96,7 +80,7 @@ public class LoggedController extends BaseLoggedController {
         User user = getUser();
         user.name = formResult.get().name;
         user.surname = formResult.get().surname;
-        user.password = formResult.get().password;
+        user.password = cryptoUtils.encrypt(formResult.get().password);
         user.update();
         return ok("");
     }
