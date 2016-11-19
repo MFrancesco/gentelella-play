@@ -9,7 +9,8 @@ import javax.inject.Singleton;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by fre on 02/07/16.
+ * Created by fre on 02/07/16
+ * a simple ApplicationScheduler that will shedule a print job every minute
  */
 @Singleton
 public class ApplicationScheduler {

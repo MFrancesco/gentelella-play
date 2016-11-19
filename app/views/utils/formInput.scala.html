@@ -1,0 +1,15 @@
+@(
+label : String,
+id : String,
+value : Object = null,
+inputType : String = "text",
+required : Boolean = true,
+inputClass : String = "form-control"
+)
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="@id">@label @if(required){<span class="required">*</span>}
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <input type="@inputType" id="@id" name="@id" @if(required){required="required"} class="@inputClass" @if(value!=null){value="@value.toString"}>
+    </div>
+</div>

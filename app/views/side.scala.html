@@ -2,7 +2,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+            <a href="@com.github.gentelella.play.controllers.routes.LoggedController.index" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Play2</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -24,27 +24,37 @@
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-                <h3>General</h3>
-                <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> Views <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a>Skeleton based<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.login()">Login</a></li>
-                                    <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.notFoundError()">Error404</a></li>
-                                    <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.serverError()">Error500</a></li>
-                                </ul>
-                            </li>
-                            <li><a>Base view based<span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.index()">Index</a></li>
-                                    <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.base()">Base</a></li>
-                                    <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.baseExtended()">Base extended</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                @if(com.github.gentelella.play.controllers.BaseLoggedController.isUser){
+                <div class="menu_section">
+                    <h3>@Messages("User")</h3>
+                    <ul class="nav side-menu">
+                        <li>
+                            <a href="@com.github.gentelella.play.controllers.routes.LoggedController.index()"><i class="fa fa fa-home"></i> Home </a>
+                        </li>
+                    </ul>
+                    @publicViews
+                </div>
+                }else{
+                <div class="menu_section">
+                    <h3>@Messages("Admin")</h3>
+                    <ul class="nav side-menu">
+                        <li>
+                            <a href="@com.github.gentelella.play.controllers.routes.LoggedController.index()"><i class="fa fa fa-home"></i> Home </a>
+                        </li>
+                        <li><a><i class="fa fa-bug"></i> Admin <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a>@Messages("Create")<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@com.github.gentelella.play.controllers.routes.AdminController.createAdmin()">@Messages("Administrator")</a></li>
+                                        <li><a href="@com.github.gentelella.play.controllers.routes.AdminController.createUser()">@Messages("User")</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    @publicViews
+                </div>
+                }
             </div>
             <!--
             <div class="menu_section">
@@ -83,3 +93,27 @@
         /menu footer buttons -->
     </div>
 </div>
+
+
+@publicViews() = {
+<ul class="nav side-menu">
+<li><a><i class="fa fa-home"></i> Public Views <span class="fa fa-chevron-down"></span></a>
+    <ul class="nav child_menu">
+        <li><a>Skeleton based<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+                <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.login()">Login</a></li>
+                <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.notFoundError()">Error404</a></li>
+                <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.serverError()">Error500</a></li>
+            </ul>
+        </li>
+        <li><a>Base view based<span class="fa fa-chevron-down"></span></a>
+            <ul class="nav child_menu">
+                <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.index()">Index</a></li>
+                <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.base()">Base</a></li>
+                <li><a href="@com.github.gentelella.play.controllers.routes.HomeController.baseExtended()">Base extended</a></li>
+            </ul>
+        </li>
+    </ul>
+</li>
+</ul>
+}

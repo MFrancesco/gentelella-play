@@ -1,5 +1,6 @@
 package com.github.gentelella.play.configurations;
 
+import com.github.gentelella.play.security.CryptoUtils;
 import com.github.gentelella.play.services.ApplicationScheduler;
 import com.github.gentelella.play.services.ApplicationTimer;
 import com.github.gentelella.play.services.Counter;
@@ -7,6 +8,9 @@ import com.google.inject.AbstractModule;
 import java.time.Clock;
 
 import com.github.gentelella.play.services.AtomicCounter;
+import play.Configuration;
+
+import javax.inject.Inject;
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -33,6 +37,9 @@ public class Module extends AbstractModule {
 
         // Set AtomicCounter as the implementation for Counter.
         bind(Counter.class).to(AtomicCounter.class);
+
+        // Bind CryptoUtils, used to encrypt the user passwords using the application secret as salt
+        bind(CryptoUtils.class).asEagerSingleton();
     }
 
 }

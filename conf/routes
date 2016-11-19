@@ -2,15 +2,26 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# An example controller showing a sample home page
-GET     /                                       com.github.gentelella.play.controllers.HomeController.index
-GET     /base                                   com.github.gentelella.play.controllers.HomeController.base
-GET     /baseExtended                           com.github.gentelella.play.controllers.HomeController.baseExtended
-GET     /login                                  com.github.gentelella.play.controllers.HomeController.login
-GET     /error500                               com.github.gentelella.play.controllers.HomeController.serverError
-GET     /error404                               com.github.gentelella.play.controllers.HomeController.notFoundError
+# Sample public routes
+GET     /public/notlogged                              com.github.gentelella.play.controllers.HomeController.index
+GET     /public/base                                   com.github.gentelella.play.controllers.HomeController.base
+GET     /public/baseExtended                           com.github.gentelella.play.controllers.HomeController.baseExtended
+GET     /public/error500                               com.github.gentelella.play.controllers.HomeController.serverError
+GET     /public/error404                               com.github.gentelella.play.controllers.HomeController.notFoundError
 
 
+GET     /                                       com.github.gentelella.play.controllers.LoggedController.index
+GET     /login                                  com.github.gentelella.play.controllers.HomeController.login(username ?= null, error ?= null)
+GET     /editProfile                            com.github.gentelella.play.controllers.LoggedController.editProfile
+POST    /editProfile                            com.github.gentelella.play.controllers.LoggedController.editProfilePost
+
+
+#ADMIN ROUTES
+GET      /admin/base                              com.github.gentelella.play.controllers.AdminController.onlyAdmin
+GET      /create/user                             com.github.gentelella.play.controllers.AdminController.createUser
+GET      /create/admin                            com.github.gentelella.play.controllers.AdminController.createAdmin
+POST     /create/user                             com.github.gentelella.play.controllers.AdminController.createUserPost
+POST     /create/admin                            com.github.gentelella.play.controllers.AdminController.createAdminPost
 
 # An example controller showing how to use dependency injection
 GET     /count                      com.github.gentelella.play.controllers.CountController.count
@@ -19,3 +30,10 @@ GET     /message                    com.github.gentelella.play.controllers.Async
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+#Security related routes
+GET         /callback                         @org.pac4j.play.CallbackController.callback()
+POST        /callback                         @org.pac4j.play.CallbackController.callback()
+GET         /casProxyCallback                 @org.pac4j.play.CallbackController.callback()
+POST        /casProxyCallback                 @org.pac4j.play.CallbackController.callback()
+GET         /logout                           @org.pac4j.play.ApplicationLogoutController.logout()

@@ -1,0 +1,39 @@
+@(user : com.github.gentelella.play.models.User)
+@base("Profile", "Profile", extraScripts = scripts){
+    @utils.panel(Messages("user.editProfile")){
+        <div class="x_content">
+            <br>
+            @helper.form(action = com.github.gentelella.play.controllers.routes.LoggedController.editProfilePost(), 'class -> "form-horizontal form-label-left" , 'id -> "editUser" ) {
+
+            @utils.formInput(Messages("user.name"), "name" , user.name)
+
+            @utils.formInput(Messages("user.surname"), "surname" , user.surname)
+
+            @utils.formInput(Messages("user.password"), "password" , user.password, inputType="password")
+
+            @utils.formInput(Messages("user.confirmPassword"), "confirmPassword" , user.password, inputType="password")
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button type="submit" class="btn btn-success">@Messages("Edit")</button>
+                    </div>
+                </div>
+
+            }
+        </div>
+    }
+}
+
+@scripts = {
+    <script type="text/javascript">
+            var showSuccessFunction = function(){
+                new PNotify({
+                    title: "@Messages("Success")",
+                    text: "@Messages("user.editSuccesfully")",
+                    type: "success"
+                });
+            };
+            $("#editUser").handleForm(showSuccessFunction);
+    </script>
+}

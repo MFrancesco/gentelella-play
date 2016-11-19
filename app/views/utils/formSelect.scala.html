@@ -1,0 +1,24 @@
+@(
+label : String,
+id : String,
+values : Map[_ <: Object,String],
+selectedValue : Object = new Object(),
+multiple : Boolean = false,
+required : Boolean = true
+)
+@selected = @{
+if(selectedValue != null)
+    selectedValue
+else
+    new Object()
+}
+<div class="item form-group">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="@id">@label @if(required){<span class="required">*</span>}</label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <select id="@id" name="@id" @if(required){required="required"}  class="form-control" @if(multiple){multiple}>
+            @for((value,label) <- values){
+                <option @if(selected.toString.equals(value.toString)){selected="selected"} value="@value.toString">@label</option>
+            }
+        </select>
+    </div>
+</div>

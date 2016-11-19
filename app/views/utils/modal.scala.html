@@ -1,0 +1,19 @@
+@(
+title : String,
+idModal : String = "",
+idModalBody : String = ""
+)(content : Html)
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" @if(!idModal.isEmpty){id="@idModal"}>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">@title</h4>
+            </div>
+            <div class="modal-body" @if(!idModalBody.isEmpty){id="@idModalBody"}>
+                @content
+            </div>
+        </div>
+    </div>
+</div>

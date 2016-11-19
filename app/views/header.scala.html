@@ -1,5 +1,5 @@
 @(
-title: String = "Scoring platform",
+title: String = "Gentelella on Play2",
 extraHead: Html = Html("")
 )
 <head>
@@ -15,6 +15,10 @@ extraHead: Html = Html("")
     <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/theme/animate.min.css")">
     <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/theme/custom.min.css")">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")">
+    <!-- PNOTIFY CSS -->
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/vendors/pnotify/pnotify.css")">
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/vendors/pnotify/pnotify.buttons.css")">
+    <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/vendors/pnotify/pnotify.nonblock.css")">
     @extraHead
 
 <!--[if lt IE 9]>
@@ -26,4 +30,9 @@ extraHead: Html = Html("")
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<!-- ADDING JUST jquery and underscorejs on top, other js will be placed in footer -->
+<script src="@routes.Assets.versioned("js/theme/jquery.min.js")" type="text/javascript"></script>
+<script src="@routes.Assets.versioned("js/vendors/underscore/underscore-min.js")" type="text/javascript"></script>
+
 </head>

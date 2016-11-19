@@ -1,0 +1,21 @@
+#Translations
+user.name=Name
+user.surname=Surname
+user.email=Email
+user.password=Password
+user.confirmPassword=Confirm password
+user.editSuccesfully=User edited succesfully
+user.createdSuccesfully=User created succesfully
+user.editProfile=Edit user profile
+
+#Errors
+error.CredentialException=Wrong credentials
+
+
+#Various
+Success=Success
+Cancel=Cancel
+Edit=Edit
+Submit=Submit
+InternalServerError=Internal server error
+ClientSideError=Client side error
