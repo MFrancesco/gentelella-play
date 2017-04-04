@@ -22,6 +22,11 @@ GET      /create/user                             com.github.gentelella.play.con
 GET      /create/admin                            com.github.gentelella.play.controllers.AdminController.createAdmin
 POST     /create/user                             com.github.gentelella.play.controllers.AdminController.createUserPost
 POST     /create/admin                            com.github.gentelella.play.controllers.AdminController.createAdminPost
+GET      /delete/user                             com.github.gentelella.play.controllers.AdminController.deleteUser(id : Long)
+
+#USER ROUTES
+GET     /user/file                                com.github.gentelella.play.controllers.UserController.fileForm
+POST     /user/file                               com.github.gentelella.play.controllers.UserController.fileFormPost
 
 # An example controller showing how to use dependency injection
 GET     /count                      com.github.gentelella.play.controllers.CountController.count

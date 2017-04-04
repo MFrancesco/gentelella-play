@@ -1,0 +1,46 @@
+@base("Example form", "", extraScripts = scripts){
+@utils.panel("Form with file submission example"){
+<div class="x_content">
+    <p>Use this form to submit a file, Max file size is ~ 1MB</p>
+    <br>
+
+    @helper.form(action = com.github.gentelella.play.controllers.routes.UserController.fileFormPost(),
+    'class -> "form-horizontal form-label-left" , 'id -> "submitFile" ,
+    'method -> "POST" , 'enctype -> "multipart/form-data" ) {
+
+    @utils.formInput("Field 1", "field1" )
+
+    @utils.formInput("File", "file" , inputType="file")
+
+    <div class="ln_solid"></div>
+    <div class="form-group">
+        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+            <button type="submit" class="btn btn-primary">Load file</button>
+        </div>
+    </div>
+
+    }
+</div>
+}}
+
+
+
+@scripts = {
+<script type="text/javascript">
+            $(function(){
+
+            var showSuccessFunction = function(data){
+                new PNotify({
+                    title: "Success",
+                    text: "File succesfully uploaded",
+                    type: "success"
+                });
+            };
+
+            $("#submitFile").handleForm(showSuccessFunction);
+
+            });
+
+    </script>
+
+}

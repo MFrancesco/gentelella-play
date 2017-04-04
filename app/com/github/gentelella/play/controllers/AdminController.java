@@ -29,6 +29,7 @@ import static play.mvc.Results.ok;
  */
 @Singleton
 public class AdminController extends BaseLoggedController {
+    static int MAX_USERS = 1000;
 
     private final FormFactory formFactory;
     private final CryptoUtils cryptoUtils;
@@ -44,6 +45,7 @@ public class AdminController extends BaseLoggedController {
         gson = new GsonBuilder().create();
         this.cryptoUtils = cryptoUtils;
     }
+
 
     public static class CreateUser {
         @Constraints.Required
@@ -63,15 +65,18 @@ public class AdminController extends BaseLoggedController {
         public List<ValidationError> validate() {
             List<ValidationError> errors = new LinkedList<ValidationError>();
             if (!password.equals(confirmPassword)) {
-                errors.add(new ValidationError("confirmPassword", "La password non corrisponde", new LinkedList<Object>()));
+                errors.add(new ValidationError("confirmPassword", "Password does not match", new LinkedList<Object>()));
             }
             User user = User.find.where().eq("email", email).findUnique();
             if (user != null)
-                errors.add(new ValidationError("email", "Utente con questa email già esistente"));
+                errors.add(new ValidationError("email", "User with this email already exist"));
+            if (User.find.all().size()>MAX_USERS)
+                errors.add(new ValidationError("email" , "Max number of created user has been reached"));
             return errors.isEmpty() ? null : errors;
         }
     }
 
+    //I hate copy and paste too, but this project is just a hobby
     public static class CreateAdmin {
         @Constraints.Required
         public String name;
@@ -91,11 +96,13 @@ public class AdminController extends BaseLoggedController {
         public List<ValidationError> validate() {
             List<ValidationError> errors = new LinkedList<ValidationError>();
             if (!password.equals(confirmPassword)) {
-                errors.add(new ValidationError("confirmPassword", "La password non corrisponde", new LinkedList<Object>()));
+                errors.add(new ValidationError("confirmPassword", "Password does not match", new LinkedList<Object>()));
             }
             User user = User.find.where().eq("email", email).findUnique();
             if (user != null)
-                errors.add(new ValidationError("email", "Utente con questa email già esistente"));
+                errors.add(new ValidationError("email", "User with this email already exist"));
+            if (User.find.all().size()>MAX_USERS)
+                errors.add(new ValidationError("email" , "Max number of created user has been reached"));
             return errors.isEmpty() ? null : errors;
         }
     }
@@ -146,6 +153,21 @@ public class AdminController extends BaseLoggedController {
         user.save();
         return ok("");
     }
+
+    @Transactional
+    @Secure(clients = "FormClient", authorizers = "admin")
+    public Result deleteUser(Long id){
+        //Can't delete yourself
+        if (getUser().id.equals(id))
+            return badRequest("invalid");
+        User userToDelete = User.find.byId(id);
+        if (userToDelete==null)
+            return badRequest("invalid");
+        userToDelete.delete();
+        return ok("deleted");
+    }
+
+
 
 }
 

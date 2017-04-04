@@ -53,11 +53,11 @@ var getGeneralAlert = function(message){
 
         var defaults = {
             errorClass : 'bad',
-            anomalResponseFunction : function () {
+            abnomalResponseFunction : function () {
                 alert("Server did not answer with a 400 error. We got a problem");
             },
             errorFieldSelector : ".item.form-group",
-            errorFunction : function(){console.log("Error");},
+            errorFunction : function(data){console.log("Got error response" + data);},
             debug : false
         };
 
@@ -85,15 +85,29 @@ var getGeneralAlert = function(message){
                     form.find(options.errorFieldSelector).removeClass(options.errorClass);
                     form.find(".alert.form-error-div").remove();
                     form.find(".alert-danger.form-general-div").remove();
-
+                    //Choose how to submit the form
+                    var formData = $(form).serialize();
+                    var contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+                    var processData = true;
+                    //If the form has the enctype setted to multipart/form-data we need to change
+                    //The way the form is handled by jquery
+                    if ($(form).attr('enctype') === "multipart/form-data"){
+                        formData = new FormData($(form)[0]);
+                        contentType = false;
+                        processData = false;
+                        if (options.debug)
+                            console.log("Posting a form with multipart/form-data");
+                    }
                     //do your own request an handle the results
                     $.ajax({
                         url: $(form).attr('action'),
                         type: 'post',
                         //dataType: 'json',
-                        data: $(form).serialize(),
+                        data: formData,
+                        processData: processData,
+                        contentType: contentType,
                         success: function(data) {
-                            successFunction();
+                            successFunction(data);
                             // remove all the validation stuff
                             if (options.debug)
                                 console.log("Removing all the validation error related classes and divs we got success baby");
@@ -116,7 +130,7 @@ var getGeneralAlert = function(message){
                                     showError("Error", "Internal server error, if this happens again, please contact the Administrator");
                                     return;
                                     }
-                                options.anomalResponseFunction();
+                                options.abnomalResponseFunction();
                                 return;
                             }
                             if (options.debug)
@@ -144,7 +158,7 @@ var getGeneralAlert = function(message){
                                     console.log("Appending error using fieldselector " + fieldSelector);
                                 formGroupItem.append(getFieldAlert(errorsString));
                                 //Call the error function
-                                options.errorFunction();
+                                options.errorFunction(xhr.responseJSON);
                             });
                         }
                     });

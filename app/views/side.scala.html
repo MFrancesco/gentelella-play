@@ -31,6 +31,15 @@
                         <li>
                             <a href="@com.github.gentelella.play.controllers.routes.LoggedController.index()"><i class="fa fa fa-home"></i> Home </a>
                         </li>
+                        <li><a><i class="fa fa-user"></i> User <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a>@Messages("Example")<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="@com.github.gentelella.play.controllers.routes.UserController.fileForm()">@Messages("fileFormExample")</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                     @publicViews
                 </div>
@@ -41,7 +50,7 @@
                         <li>
                             <a href="@com.github.gentelella.play.controllers.routes.LoggedController.index()"><i class="fa fa fa-home"></i> Home </a>
                         </li>
-                        <li><a><i class="fa fa-bug"></i> Admin <span class="fa fa-chevron-down"></span></a>
+                        <li><a><i class="fa fa-user"></i> Admin <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li><a>@Messages("Create")<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">

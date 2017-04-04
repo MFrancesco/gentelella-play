@@ -7,10 +7,14 @@ user.confirmPassword=Confirm password
 user.editSuccesfully=User edited succesfully
 user.createdSuccesfully=User created succesfully
 user.editProfile=Edit user profile
+user.createNew=Create new user
+user.createNewAdmin=Create new admin
 
 #Errors
 error.CredentialException=Wrong credentials
 error.passwordDoesNotMatch=Password does not match
+file.valid = Valid file
+file.invalid = Invalid file
 
 #Various
 Success=Success
@@ -19,3 +23,4 @@ Edit=Edit
 Submit=Submit
 InternalServerError=Internal server error
 ClientSideError=Client side error
+
