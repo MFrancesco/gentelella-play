@@ -1,8 +1,14 @@
 # Gentelella admin template for Play Framework
 
-Starting from [play2-java](https://github.com/playframework/playframework/tree/master/templates/play-java) template
+Starting from [Play Java Starter](https://github.com/playframework/play-java-starter-example) template
 a minimal structure for the views and assets has been setted up so developer can create new views easily.
 
+This seed project also includes the following libraries
+
+* [Pac4j](https://github.com/pac4j/play-pac4j) for authentication
+* [Ebean ORM](https://www.playframework.com/documentation/2.5.x/JavaEbean) to handle the db. [Evolutions](https://www.playframework.com/documentation/2.5.x/Evolutions#managing-database-evolutions) are enabled too
+
+and some JS to handle form submissions
 
 ## Installation
 Being a Play2 java project the best way to install and work with it is using the [activator](https://playframework.com/download)
@@ -33,7 +39,3 @@ Feel free to run the project and browse the code for in-depth details
 ## License
 
 This project is licensed under The MIT License (MIT).
-
-
-
-
